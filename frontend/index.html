@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Push Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔔 Web Push Notifications</h1>
+            <p>Demonstração simples de notificações push no navegador</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2>Status do Serviço</h2>
+                <div class="status-indicator">
+                    <div class="status-item">
+                        <span class="status-label">Service Worker:</span>
+                        <span id="sw-status" class="status-badge">Verificando...</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Push API:</span>
+                        <span id="push-status" class="status-badge">Verificando...</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Permissão:</span>
+                        <span id="permission-status" class="status-badge">Verificando...</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Inscrição:</span>
+                        <span id="subscription-status" class="status-badge">Verificando...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Controles</h2>
+                <div class="controls">
+                    <button id="request-permission" class="btn btn-primary" disabled>
+                        Solicitar Permissão
+                    </button>
+                    <button id="subscribe" class="btn btn-success" disabled>
+                        Inscrever para Notificações
+                    </button>
+                    <button id="unsubscribe" class="btn btn-danger" disabled>
+                        Cancelar Inscrição
+                    </button>
+                    <button id="test-notification" class="btn btn-secondary" disabled>
+                        Testar Notificação
+                    </button>
+                    <button id="send-custom" class="btn btn-info" disabled>
+                        Enviar Notificação Customizada
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Enviar Notificação Customizada</h2>
+                <div id="custom-notification-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="title">Título:</label>
+                        <input type="text" id="title" class="form-control" 
+                               placeholder="Título da notificação" value="Olá! 👋">
+                    </div>
+                    <div class="form-group">
+                        <label for="body">Mensagem:</label>
+                        <textarea id="body" class="form-control" rows="3" 
+                                  placeholder="Mensagem da notificação">Você tem uma nova mensagem!</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="icon">Ícone (URL):</label>
+                        <input type="text" id="icon" class="form-control" 
+                               placeholder="https://exemplo.com/icon.png" 
+                               value="https://via.placeholder.com/128.png/09f/fff?text=🔔">
+                    </div>
+                    <div class="form-group">
+                        <label for="url">URL para abrir:</label>
+                        <input type="text" id="url" class="form-control" 
+                               placeholder="https://exemplo.com" 
+                               value="https://github.com">
+                    </div>
+                    <button id="send-custom-now" class="btn btn-info">
+                        Enviar Notificação
+                    </button>
+                </div>
+                <p id="custom-form-info">Primeiro inscreva-se para habilitar</p>
+            </div>
+
+            <div class="card">
+                <h2>Informações da Inscrição</h2>
+                <div class="subscription-info">
+                    <pre id="subscription-details">Nenhuma inscrição ativa</pre>
+                </div>
+                <button id="copy-subscription" class="btn btn-small" style="display: none;">
+                    Copiar Dados da Inscrição
+                </button>
+            </div>
+
+            <div class="card">
+                <h2>Log de Eventos</h2>
+                <div class="log-container">
+                    <div id="event-log"></div>
+                </div>
+                <button id="clear-log" class="btn btn-small">
+                    Limpar Log
+                </button>
+            </div>
+        </main>
+
+        <footer>
+            <p>Web Push Demo • Use HTTPS para testar em produção</p>
+            <p class="small">
+                <strong>Nota:</strong> Funciona em localhost para desenvolvimento
+            </p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
