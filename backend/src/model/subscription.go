@@ -15,6 +15,7 @@ type Keys struct {
 type Payload struct {
 	Title   string   `json:"title"`
 	Body    string   `json:"body"`
+	Image   string   `json:"image"`
 	Icon    string   `json:"icon"`
 	Url     string   `json:"url"`
 	Actions []Action `json:"actions"`

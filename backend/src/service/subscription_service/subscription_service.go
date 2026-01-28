@@ -37,7 +37,7 @@ func (s *SubscriptionService) SendTest(subscription *model.Subscription) error {
 		VAPIDPrivateKey: os.Getenv("VAPID_PRIVATE_KEY"),
 		TTL:             30,
 	}
-	resp, err := webpush.SendNotification([]byte(`{"title":"Teste","body":"Esta é uma notificação de teste!"}`), sub, opt)
+	resp, err := webpush.SendNotification([]byte(`{"title":"Teste","body":"Esta é uma notificação de teste!","image":"https://www.mdfnaweb.com.br/public/produtos/762/3434-laser-letra-quot-a-quot-coperblack-3cm_m.jpg?1711980393"}`), sub, opt)
 	if err != nil {
 		return err
 	}
@@ -58,7 +58,7 @@ func (s *SubscriptionService) SendNotification(subscription *model.Subscription,
 			P256dh: subscription.Keys.P256dh,
 		},
 	}
-	opt := &webpush.Options{
+	opt := &webpush.Options{	
 		Subscriber:      "example@example.com",
 		VAPIDPublicKey:  os.Getenv("VAPID_PUBLIC_KEY"),
 		VAPIDPrivateKey: os.Getenv("VAPID_PRIVATE_KEY"),
